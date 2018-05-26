@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '~normalize.css/normalize.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'https://fonts.googleapis.com/icon?family=Material+Icons';
+
+.m-x-auto {
+  margin: 0 auto;
+}
+
+.owl-dateTime-input {
+    width: auto !important;
+    padding-right: 0 !important;
+    font-size: 14px;
+}
+
+.owl-inputtext.owl-state-focus, .owl-inputtext:focus {
+    -moz-box-shadow: 0 0 5px transparent;
+    box-shadow: 0 0 5px transparent;
+}
+
+.owl-state-default {
+	border:1px solid transparent;
+	border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+.owl-state-default:focus {
+	border-bottom: 1.5px solid rgb(63, 81, 181);
+}
+
+.owl-inputtext {
+	padding: .3em;
+}

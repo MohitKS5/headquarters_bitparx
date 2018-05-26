@@ -1,0 +1,14 @@
+.bg-transparent {
+  background-color: rgb(63,81,181);
+  background-color: rgba(63,81,181, 0.01);
+  box-shadow: none;
+  color: #111;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.navbar-brand{
+  text-decoration : none;
+}

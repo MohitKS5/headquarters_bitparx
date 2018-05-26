@@ -1,0 +1,34 @@
+.profile {
+  margin: 0 auto;
+  width: 60%;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+mat-card-content {
+  padding-top: 20px;
+}
+
+.left-pad {
+  padding-left: 10px;
+}
+
+mat-list {
+  margin-bottom: 20px;
+}
+
+.chip {
+  background-color: #eeeeee;
+  border-radius: 40px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 10px 15px;
+  text-align: center;
+}
+
+hr {
+  color: #888888;
+  width: 100%;
+}

@@ -1,0 +1,9 @@
+.dashboard {
+  margin: 0 auto;
+  min-width: 600px;
+  width: 50%;
+}
+
+mat-card-title {
+  text-align: center;
+}

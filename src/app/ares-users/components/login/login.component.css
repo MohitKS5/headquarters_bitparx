@@ -1,0 +1,16 @@
+mat-card {
+  margin: 0 auto;
+  width: 400px;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+form {
+  margin-bottom: 50px;
+}
+
+mat-card-footer {
+  padding-left: 20px;
+}

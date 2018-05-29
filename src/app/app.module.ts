@@ -6,9 +6,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CdkTableModule} from '@angular/cdk/table';
 
 import {HttpClientModule} from '@angular/common/http';
-
-import {MatTableModule} from '@angular/material/table';
-
 import {CKEditorModule} from 'ng2-ckeditor';
 import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
@@ -28,6 +25,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {AresMaterialModule} from './modules/material.module';
 import { SynchronicityComponent } from './roadtrips/components/synchronicity/synchronicity.component';
 import {MarkdownModule} from 'ngx-markdown';
+import {MaterialTableComponent} from './utility/material-table/material-table.component';
+import { MaterialTreeComponent } from './utility/material-tree/material-tree.component';
 
 
 @NgModule({
@@ -38,7 +37,8 @@ import {MarkdownModule} from 'ngx-markdown';
     AppComponent,
     fromAresUsers.components,
     fromUtils.declarations,
-    SynchronicityComponent
+    SynchronicityComponent,
+    MaterialTreeComponent
   ],
   imports: [
     // core modules
@@ -58,7 +58,6 @@ import {MarkdownModule} from 'ngx-markdown';
     AppRoutingModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    MatTableModule,
   ],
   providers: [
     fromAresUsers.services,

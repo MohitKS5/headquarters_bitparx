@@ -14,3 +14,17 @@ form {
 mat-card-footer {
   padding-left: 20px;
 }
+
+.body {
+  margin: 0;
+}
+
+.display-header {
+  text-align: center;
+  color: #ccc;
+  font-size: 4rem;
+}
+
+.text-center {
+  text-align: center;
+}

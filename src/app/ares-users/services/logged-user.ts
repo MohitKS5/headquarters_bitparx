@@ -39,7 +39,6 @@ export class LoggedUserService {
       })
     ) as Observable<ILocalUser>;
     $logged.subscribe((users) => {
-      console.log(users);
       this.currentUser.next(users as LocalUser)
     });
   };

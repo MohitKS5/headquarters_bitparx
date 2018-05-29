@@ -10,10 +10,22 @@ import {Observable} from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent implements OnInit {
 
   localUser: Observable<LocalUser>;
-
+  tiles: Array<Tile> = [
+    {
+      name: 'LocalUsers',
+      level: 'admin',
+      link: '/users',
+    },
+    {
+      name: 'Profile',
+      level: 'member',
+      link: 'profile'
+    }
+  ];
 
   constructor(private localUserService: LoggedUserService) {
   }
@@ -27,4 +39,10 @@ export class DashboardComponent implements OnInit {
     this.localUser = this.localUserService.currentUser;
   }
 
+}
+
+class Tile {
+  name: string;
+  level: string;
+  link: string;
 }

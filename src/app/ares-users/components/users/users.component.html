@@ -1,17 +1,22 @@
-<mat-card class="users">
-  <app-go-back-component></app-go-back-component>
-  <mat-card-title> Users </mat-card-title>
-  <mat-card-content>
-    <div fxLayout="column">
-      <div fxLayout="row" fxLayoutAlign="center center">
-        <span fxFlex=""> <strong>Username</strong> </span>
-        <span fxFlex="" style="text-align: center"> <strong>Levels</strong> </span>
-        <span fxFlex="" style="text-align: center"> <strong>Requested</strong> </span>
-        <span fxFlex=""> <strong>Delete</strong> </span>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let localUser of localUsers">
-        <span fxFlex=""> {{(localUser)?.email }} </span>
-        <span fxFlex="" fxLayout="column" fxLayoutAlign="center center">
+<mat-drawer-container>
+  <mat-drawer #drawer class="primary" mode="side">
+    <p>Auto-resizing sidenav</p>
+    <app-material-tree></app-material-tree>
+  </mat-drawer>
+  <mat-card class="users">
+    <app-go-back-component></app-go-back-component>
+    <mat-card-title> Users</mat-card-title>
+    <mat-card-content>
+      <div fxLayout="column">
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <span fxFlex=""> <strong>Username</strong> </span>
+          <span fxFlex="" style="text-align: center"> <strong>Levels</strong> </span>
+          <span fxFlex="" style="text-align: center"> <strong>Requested</strong> </span>
+          <span fxFlex=""> <strong>Delete</strong> </span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" *ngFor="let localUser of localUsers">
+          <span fxFlex=""> {{(localUser)?.email }} </span>
+          <span fxFlex="" fxLayout="column" fxLayoutAlign="center center">
           <div fxFlex="" class="chip" *ngFor="let level of localUser?.levelsCurrent">
             {{ level }}
             <button mat-icon-button (click)="deny(localUser, level, 'levelsCurrent')">
@@ -19,7 +24,7 @@
             </button>
           </div>
         </span>
-        <span fxFlex="" fxLayout="column" fxLayoutAlign="center center">
+          <span fxFlex="" fxLayout="column" fxLayoutAlign="center center">
           <div fxFlex="" class="chip2" *ngFor="let level of localUser?.levelsRequested">
             <button mat-icon-button (click)="approve(localUser, level)">
               <mat-icon>check</mat-icon>
@@ -30,12 +35,13 @@
             </button>
           </div>
         </span>
-        <span fxFlex="">
+          <span fxFlex="">
           <button mat-icon-button>
             <mat-icon>delete</mat-icon>
           </button>
         </span>
+        </div>
       </div>
-    </div>
-  </mat-card-content>
-</mat-card>
+    </mat-card-content>
+  </mat-card>
+</mat-drawer-container>

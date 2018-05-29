@@ -8,11 +8,11 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatRippleModule,
-  MatSelectModule,
+  MatSelectModule, MatSidenavModule,
   MatSnackBarModule,
   MatSortModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule, MatTreeModule
 } from '@angular/material';
 
 export const modules = [
@@ -30,6 +30,9 @@ export const modules = [
   MatTableModule,
   MatToolbarModule,
   MatListModule,
+  MatTableModule,
+  MatSidenavModule,
+  MatTreeModule,
 ];
 @NgModule({
   imports: modules,

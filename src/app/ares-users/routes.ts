@@ -4,7 +4,9 @@ import * as component from './components';
 import {SynchronicityComponent} from '../roadtrips/components/synchronicity/synchronicity.component';
 
 export const aresUsersRoutes: Routes = [
-  {path: 'dashboard', component: component.DashboardComponent, canActivate: [LocalUserGuard]},
+  {path: 'dashboard', component: component.DashboardComponent,
+    // canActivate: [LocalUserGuard]
+  },
   {path: 'login', component: component.LoginComponent, canActivate: [LoggedInGuard]},
   {path: 'profile', component: component.ProfileComponent, canActivate: [LocalUserGuard]},
   {path: 'signup', component: component.SignupComponent, canActivate: [LoggedInGuard]},

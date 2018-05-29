@@ -1,0 +1,20 @@
+<button mat-raised-button (click)="excel()">Download Excel</button>
+
+<div class="tablewrapper">
+  <mat-table #table [dataSource]="dataSource">
+
+    <ng-container *ngFor="let field of fields; let i = index" [matColumnDef]="field">
+      <mat-header-cell *matHeaderCellDef> {{field}} </mat-header-cell>
+      <mat-cell *matCellDef="let element">{{getVal(element,i)}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sno">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="fields"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: fields;"></mat-row>
+  </mat-table>
+
+</div>

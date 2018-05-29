@@ -12,3 +12,12 @@
 .navbar-brand{
   text-decoration : none;
 }
+
+mat-toolbar{
+  font-weight: 900;
+}
+
+a,i{
+  text-decoration: none;
+  color: white;
+}

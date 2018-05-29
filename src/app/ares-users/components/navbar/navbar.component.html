@@ -1,7 +1,8 @@
-<mat-toolbar>
+<mat-toolbar class="secondary">
   <a class="navbar-brand" routerLink="/dashboard" *ngIf="loginService.currentUser | async">Dashboard</a>
+  <i class="fa fa-bars" (click)="toggleit()"></i>
   <span class="fill-remaining-space"></span>
   <span *ngIf="loginService.currentUser | async">
-    <a mat-button (click)="logout()">Logout</a>
+    <button mat-raised-button (click)="logout()">Logout</button>
   </span>
 </mat-toolbar>

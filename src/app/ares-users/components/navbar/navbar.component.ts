@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 
 import {LoggedUserService} from '../../services';
 import {Funcs} from 'app/utility/functions';
+import {UiService} from '../../../utility/services/ui.service';
+import {map} from 'rxjs/internal/operators';
 
 @Component({
   moduleId: module.id,
@@ -14,9 +16,13 @@ export class NavbarComponent {
 
   constructor(public loginService: LoggedUserService,
               private router: Router,
-              private functions: Funcs) {
+              private functions: Funcs,
+              private ui: UiService
+  ) {
   }
-
+  toggleit(){
+    this.ui.sidenavOpen.next(true);
+  }
   logout = () => {
     this.loginService.logout()
       // .then(() => this.router.navigate(['login']))

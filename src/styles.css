@@ -31,3 +31,26 @@
 .owl-inputtext {
 	padding: .3em;
 }
+
+body{
+}
+
+.primary{
+  background-color: #cbe091;
+}
+
+.secondary{
+  background-color: #00a38a;
+}
+
+.light{
+  background-color: rgba(255,255,255,0.3);
+}
+
+.lighter{
+  background-color: rgba(255,255,255,0.5);
+}
+
+.lightest{
+  background-color: rgba(255,255,255,0.7);
+}

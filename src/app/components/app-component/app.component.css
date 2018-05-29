@@ -4,6 +4,8 @@
 
 .display-header {
   text-align: center;
+  color: #ccc;
+  font-size: 4rem;
 }
 
 .text-center {

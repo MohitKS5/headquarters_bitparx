@@ -30,3 +30,12 @@ span[fxFlex] {
   padding: 0 0;
   text-align: center;
 }
+
+mat-drawer{
+  width: 20vw;
+  min-width: 300px;
+}
+
+mat-drawer-container{
+  min-height: 90vh;
+}

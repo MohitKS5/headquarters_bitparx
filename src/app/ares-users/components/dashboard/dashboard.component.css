@@ -1,9 +1,15 @@
 .dashboard {
-  margin: 0 auto;
-  min-width: 600px;
-  width: 50%;
+  min-width: 300px;
+  width: 20%;
+  min-height: 10vh;
+  font-family: Monospace;
 }
 
 mat-card-title {
   text-align: center;
+}
+
+.wrapper{
+  width: 100vw;
+  padding: 10vh;
 }

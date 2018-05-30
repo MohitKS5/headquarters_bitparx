@@ -10,7 +10,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {tap} from 'rxjs/internal/operators';
 import {defaultUser, ILocalUser} from "../models";
-import {HindQuartersResponse} from "../models/response";
+import {BitServResponse, Register} from '../models/response';
 
 @Injectable()
 export class LoggedUserService {
@@ -25,7 +25,7 @@ export class LoggedUserService {
   }
 
   signIn = (username: string, pass: string): void => {
-    let $logged: Observable<any> = this.http.post<HindQuartersResponse>('api/login', JSON.stringify({
+    let $logged: Observable<any> = this.http.post<BitServResponse<Register>>('api/login', JSON.stringify({
       user: username,
       password: pass
     })).pipe(
@@ -68,7 +68,7 @@ export class LoggedUserService {
   }
 
   signUp = (username: string, pass: string) => {
-    let $logged: Observable<HindQuartersResponse> = this.http.post<HindQuartersResponse>('api/register', JSON.stringify({
+    let $logged: Observable<BitServResponse<Register>> = this.http.post<BitServResponse<Register>>('api/register', JSON.stringify({
       username: username,
       password: pass,
       auth: {

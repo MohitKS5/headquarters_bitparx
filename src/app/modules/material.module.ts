@@ -8,7 +8,7 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatRippleModule,
-  MatSelectModule, MatSidenavModule,
+  MatSelectModule,MatSidenavModule, MatSlideToggleModule,
   MatSnackBarModule,
   MatSortModule,
   MatTableModule,
@@ -33,6 +33,7 @@ export const modules = [
   MatTableModule,
   MatSidenavModule,
   MatTreeModule,
+  MatSlideToggleModule,
 ];
 @NgModule({
   imports: modules,

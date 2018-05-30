@@ -11,6 +11,7 @@
 
 .navbar-brand{
   text-decoration : none;
+  margin: 0 20px;
 }
 
 mat-toolbar{
@@ -20,4 +21,5 @@ mat-toolbar{
 a,i{
   text-decoration: none;
   color: white;
+  cursor: pointer;
 }

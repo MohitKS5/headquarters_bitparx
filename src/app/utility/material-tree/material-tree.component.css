@@ -1,3 +1,7 @@
 mat-tree-node{
   cursor: pointer;
 }
+
+i{
+  margin: 0 20px 0 0;
+}

@@ -12,15 +12,14 @@ export class LocalUserGuard implements CanActivate {
   }
 
   canActivate(): Observable<boolean> {
-    // return this.localUserService.isAuthenticated$.pipe(
-    //   map((result) => {
-    //     if (!result.payload) {
-    //       this.router.navigate(['login']);
-    //     }
-    //     return !!result.payload;
-    //   })
-    // );
-    return of(true)
+    return this.localUserService.isAuthenticated$.pipe(
+      map((result) => {
+        if (!result.payload) {
+          this.router.navigate(['login']);
+        }
+        return !!result.payload;
+      })
+    );
   }
 }
 
@@ -32,15 +31,14 @@ export class LoggedInGuard implements CanActivate {
   }
 
   canActivate(): Observable<boolean> {
-    // return this.localUserService.isAuthenticated$.pipe(
-    //   map((result) => {
-    //     if (result.payload) {
-    //       this.router.navigate(['dashboard']);
-    //     }
-    //     return !result.payload;
-    //   })
-    // );
-    return of(true)
+    return this.localUserService.isAuthenticated$.pipe(
+      map((result) => {
+        if (result.payload) {
+          this.router.navigate(['dashboard']);
+        }
+        return !result.payload;
+      })
+    );
   }
 }
 

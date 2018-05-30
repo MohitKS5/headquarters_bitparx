@@ -1,5 +1,5 @@
 import {FlatTreeControl} from '@angular/cdk/tree';
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {BehaviorSubject, Observable, of as observableOf} from 'rxjs';
 
@@ -21,45 +21,6 @@ export class FileFlatNode {
   expandable: boolean;
 }
 
-/**
- * The file structure tree data in string. The data could be parsed into a Json object
- */
-const TREE_DATA = `
-  {
-    "Documents": {
-      "angular": {
-        "src": {
-          "core": "ts",
-          "compiler": "ts"
-        }
-      },
-      "material2": {
-        "src": {
-          "button": "ts",
-          "checkbox": "ts",
-          "input": "ts"
-        }
-      }
-    },
-    "Downloads": {
-        "Tutorial": "html",
-        "November": "pdf",
-        "October": "pdf"
-    },
-    "Pictures": {
-        "Sun": "png",
-        "Woods": "jpg",
-        "Photo Booth Library": {
-          "Contents": "dir",
-          "Pictures": "dir"
-        }
-    },
-    "Applications": {
-        "Chrome": "app",
-        "Calendar": "app",
-        "Webstorm": "app"
-    }
-}`;
 
 /**
  * File database, it can build a tree structured Json object from string.
@@ -75,12 +36,11 @@ export class FileDatabase {
   get data(): FileNode[] { return this.dataChange.value; }
 
   constructor() {
-    this.initialize();
   }
 
-  initialize() {
+  initialize(jsondata: string) {
     // Parse the string to json object.
-    const dataObject = JSON.parse(TREE_DATA);
+    const dataObject = JSON.parse(jsondata);
 
     // Build the tree nodes from Json object. The result is a list of `FileNode` with nested
     //     file node as children.
@@ -121,21 +81,25 @@ export class FileDatabase {
   templateUrl: './material-tree.component.html',
   styleUrls: ['./material-tree.component.css']
 })
-export class MaterialTreeComponent {
-
+export class MaterialTreeComponent implements OnInit{
+  @Input() treeData;
   treeControl: FlatTreeControl<FileFlatNode>;
 
   treeFlattener: MatTreeFlattener<FileNode, FileFlatNode>;
 
   dataSource: MatTreeFlatDataSource<FileNode, FileFlatNode>;
 
-  constructor(database: FileDatabase) {
+  constructor(private database: FileDatabase) {
+  }
+
+  ngOnInit(){
+    this.database.initialize(this.treeData);
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
     this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-    database.dataChange.subscribe(data => {
+    this.database.dataChange.subscribe(data => {
       this.dataSource.data = data;
     });
   }

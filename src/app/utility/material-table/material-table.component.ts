@@ -1,5 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {AngularFirestore} from 'angularfire2/firestore';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {JsontocsvService} from '../services/jsontocsv.service';
 
 @Component({
@@ -7,21 +6,25 @@ import {JsontocsvService} from '../services/jsontocsv.service';
   templateUrl: './material-table.component.html',
   styleUrls: ['./material-table.component.css']
 })
-export class MaterialTableComponent implements OnInit{
+export class MaterialTableComponent implements OnInit {
 
   @Input() fields: Array<string>;
   @Input() schema: string;
   @Input() dataSource;
   @Input() data;
+
+  @Output() slider = new EventEmitter<tableIndex>();
   fieldnames: Array<Array<string>>;
-  constructor(private afs: AngularFirestore, private j2c: JsontocsvService) {
+
+  constructor(private j2c: JsontocsvService) {
   }
 
-  ngOnInit(){
-    this.fieldnames = this.schema.replace(/[\t\n ]/g,'')
+  ngOnInit() {
+    this.fieldnames = this.schema.replace(/[\t\n ]/g, '')
       .split(';').map(val => val.split(','));
     console.log(this.fieldnames)
   }
+
   excel() {
     this.j2c.excel(this.data);
   }
@@ -29,4 +32,23 @@ export class MaterialTableComponent implements OnInit{
   getVal(el, index) {
     return this.fieldnames[index].map((val) => el[val]).join(', ')
   }
+
+  checkbool(el) {
+    return typeof el == 'boolean'
+  }
+
+  syncIt(tupple: any,field: string,res: boolean) {
+    this.slider.emit({
+      tupple: tupple,
+      field: field,
+      value: res
+    })
+
+  }
+}
+
+export class tableIndex {
+  tupple: any;
+  field: string;
+  value: boolean;
 }

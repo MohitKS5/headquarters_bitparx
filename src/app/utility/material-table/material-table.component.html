@@ -5,7 +5,13 @@
 
     <ng-container *ngFor="let field of fields; let i = index" [matColumnDef]="field">
       <mat-header-cell *matHeaderCellDef> {{field}} </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{getVal(element,i)}} </mat-cell>
+      <mat-cell *matCellDef="let element">
+        <span *ngIf="!checkbool(element[fieldnames[i]])">{{getVal(element,i)}}</span>
+        <mat-slide-toggle
+          #slider *ngIf="checkbool(element[fieldnames[i]])" [checked]="element[fieldnames[i]]"
+          (change)="syncIt(element,field,slider.checked)">
+        </mat-slide-toggle>
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="sno">
@@ -13,8 +19,8 @@
       <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="fields"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: fields;"></mat-row>
+    <mat-header-row *matHeaderRowDef="['sno'].concat(fields)"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['sno'].concat(fields);"></mat-row>
   </mat-table>
 
 </div>

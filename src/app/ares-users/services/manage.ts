@@ -3,19 +3,21 @@ import {from as fromPromise, Observable, of} from 'rxjs';
 import {Funcs} from 'app/utility/functions';
 import {Injectable} from '@angular/core';
 import {catchError, first, map, switchMap} from 'rxjs/internal/operators';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BitServResponse, ReceivedAccessLevels, Access, flattenNullBool} from '../models/response';
+import {LoggedUserService} from './logged-user';
 
 
 @Injectable()
 export class LocalUserService {
-  constructor(private functions: Funcs, private http: HttpClient) {
+  constructor(private functions: Funcs, private http: HttpClient, private auth: LoggedUserService) {
   }
 
-  approve = (username, level) => this.http.put('/api/levels/'+level+'/'+username, "");
-  deny = (username, level) => this.http.delete('/api/levels/'+level+'/'+username);
+  approve = (username, level) => this.http.put('/api/levels/'+level+'/'+username, "", {headers: this.auth.authHeader()});
+  deny = (username, level) => this.http.delete('/api/levels/'+level+'/'+username, {headers: this.auth.authHeader()});
 
-  fetchUserLevels = () => this.http.post<BitServResponse<Array<ReceivedAccessLevels>>>('/api/levels', '');
+  fetchUserLevels = () => this.http.post<BitServResponse<Array<ReceivedAccessLevels>>>(
+    '/api/levels', '', {headers: this.auth.authHeader()});
 
   fetchFlattenedUsers() {
     return this.fetchUserLevels().pipe(

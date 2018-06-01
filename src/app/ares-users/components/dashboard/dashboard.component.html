@@ -1,10 +1,12 @@
 <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="25px" class="wrapper">
-  <mat-card class="dashboard primary" *ngFor="let tile of tiles">
-    <mat-card-title>{{tile.name}}</mat-card-title>
-    <mat-card-content *ngIf="checklevel('hospitality') | async" fxLayoutAlign="center center">
-      <button mat-raised-button [routerLink]="tile.link"> View</button>
-    </mat-card-content>
-  </mat-card>
+  <div *ngFor="let tile of tiles">
+    <mat-card class="dashboard primary" *ngIf="checklevel(tile.level) | async">
+      <mat-card-title>{{tile.name}}</mat-card-title>
+      <mat-card-content fxLayoutAlign="center center">
+        <button mat-raised-button [routerLink]="tile.link"> View</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 <!--<mat-card-content>-->
 <!--<h1> Backend User Stuff </h1>-->

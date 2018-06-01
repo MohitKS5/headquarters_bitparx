@@ -32,3 +32,11 @@ hr {
   color: #888888;
   width: 100%;
 }
+
+mat-select{
+  width: 40%;
+  padding: 8px;
+  margin: 0 50px;
+  border: 1px solid white;
+  border-radius: 7px;
+}

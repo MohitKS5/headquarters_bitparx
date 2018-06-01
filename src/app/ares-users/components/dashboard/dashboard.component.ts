@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {LoggedUserService} from '../../services';
 import {LocalUser} from '../../models';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 
 @Component({
   moduleId: module.id,
@@ -17,13 +17,13 @@ export class DashboardComponent implements OnInit {
   tiles: Array<Tile> = [
     {
       name: 'LocalUsers',
-      level: 'admin',
+      level: 'Admin',
       link: '/users',
     },
     {
       name: 'Profile',
-      level: 'member',
-      link: 'profile'
+      level: 'Member',
+      link: '/profile'
     }
   ];
 
@@ -32,6 +32,8 @@ export class DashboardComponent implements OnInit {
 
 
   checklevel(str: string) {
+    if (str === "Member")
+      return of(true);
     return this.localUserService.checkLevel(str);
   }
 

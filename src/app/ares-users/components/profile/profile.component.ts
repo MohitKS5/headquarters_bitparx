@@ -5,6 +5,7 @@ import {descriptions, Levels} from '../../data';
 import {Observable} from 'rxjs';
 import {Funcs} from '@utils';
 import {catchError} from 'rxjs/internal/operators';
+import {flattenNullBool} from '../../models/response';
 
 @Component({
   moduleId: module.id,
@@ -27,6 +28,14 @@ export class ProfileComponent implements OnInit {
   levels = (user: LocalUser): Array<string> =>
     user.levelsRequested ? this.Alllevels.filter((val) => !user.levelsRequested.includes(val)) : this.Alllevels;
 
+  CurrentLevels(levs){
+    return Object.keys(levs).filter(lev => flattenNullBool(levs[lev]))
+  }
+
+  RequestedLevels(levs){
+    return Object.keys(levs).filter(lev => !levs[lev].Valid)
+  }
+
   ngOnInit(): void {
     this.indices = Array(this.levels.length).fill(0).map((x: any, i: number) => i);
     this.Alllevels = Object.keys(new Levels());
@@ -36,8 +45,8 @@ export class ProfileComponent implements OnInit {
   }
 
   request = (): void => {
-    // this.loginService.requestLevel(this.selectedVal).pipe(
-    //   catchError((err) => this.functions.handleError(err.message))
-    // ).subscribe(() => this.selectedVal = null);
+    this.loginService.requestLevel(this.selectedVal).pipe(
+      catchError((err) => this.functions.handleError(err.message))
+    ).subscribe(() => this.selectedVal = null);
   };
 }

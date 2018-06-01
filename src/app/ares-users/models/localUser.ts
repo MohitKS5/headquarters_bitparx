@@ -3,8 +3,9 @@ export interface LocalUser {
   levelsCurrent: Array<string>;
   levelsRequested: Array<string>;
   uid: string;
-  displayName: string;
+  username: string;
   email: string | null;
+  accountlevels: any;
 }
 
 export class ILocalUser implements LocalUser {
@@ -12,9 +13,10 @@ export class ILocalUser implements LocalUser {
   levelsCurrent: Array<string>;
   levelsRequested: Array<string>;
   uid: string;
-  displayName: string;
+  username: string;
   email: string | null;
-  device_id: string
+  device_id: string;
+  accountlevels: any;
   constructor() {}
 }
 

@@ -9,6 +9,7 @@ export interface Register{
     access_token: string
     trade_server: string
     device_id: string
+    accountlevels: any
 }
 
 // response for Levels

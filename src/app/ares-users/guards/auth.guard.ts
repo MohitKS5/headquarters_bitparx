@@ -51,8 +51,8 @@ export class LevelGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> {
-    // const level = route.data['level'] as string;
-    // return this.localUserService.checkLevel(level)
-    return of(true);
+    const level = route.data['level'] as string;
+    return this.localUserService.checkLevel(level)
+    // return of(true);
   }
 }

@@ -8,8 +8,9 @@ export const aresUsersRoutes: Routes = [
     canActivate: [LocalUserGuard]
   },
   {path: 'login', component: component.LoginComponent, canActivate: [LoggedInGuard]},
-  {path: 'profile', component: component.ProfileComponent, canActivate: [LocalUserGuard]},
+  {path: 'profile', component: component.ProfileComponent,
+    canActivate: [LocalUserGuard]
+  },
   {path: 'signup', component: component.SignupComponent, canActivate: [LoggedInGuard]},
-  {path: 'users', component: component.UsersComponent, canActivate: [LevelGuard], data: {level: 'admin'}},
-  {path: 'roadtrips', component: SynchronicityComponent, canActivate: [LevelGuard], data: {level: 'synchronicity'}},
+  {path: 'users', component: component.UsersComponent, canActivate: [LevelGuard], data: {level: 'Admin'}},
 ];

@@ -8,9 +8,9 @@ import {Router} from '@angular/router';
 import {Funcs} from 'app/utility/functions';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
-import {tap} from 'rxjs/internal/operators';
-import {defaultUser, ILocalUser} from "../models";
-import {BitServResponse, Register} from '../models/response';
+import {map, tap} from 'rxjs/internal/operators';
+import {defaultUser, ILocalUser} from '../models';
+import {BitServResponse, flattenNullBool, NullBool, Register} from '../models/response';
 
 @Injectable()
 export class LoggedUserService {
@@ -39,20 +39,21 @@ export class LoggedUserService {
       })
     ) as Observable<ILocalUser>;
     $logged.subscribe((users) => {
-      this.currentUser.next(users as LocalUser)
+      this.currentUser.next({...users.JSON, ...defaultUser, username: username} as LocalUser)
     });
   };
 
-  requestLevel(a) {
-    of(200)
+  requestLevel(level: string) {
+    return this.http.post('/api/levels/' + level.toLowerCase(), '', {headers: this.authHeader()}).pipe(
+      tap(() => this.currentUser.pipe(
+        map((res) => res.accountlevels[level] = {Valid: false, Value: false})
+      ).subscribe()),
+      catchError(err => this.functions.handleError(err.Error))
+    );
   }
 
   logout() {
-    let Headers: HttpHeaders;
-    this.isAuthenticated$.subscribe(
-      (res) => Headers = new HttpHeaders().set('Authorization', 'Bearer ' + res.payload)
-    );
-    let logout$ = this.http.post<any>('api/logout', null, {headers: Headers}).pipe(
+    let logout$ = this.http.post<any>('api/logout', null, {headers: this.authHeader()}).pipe(
       tap(() => {
         this.isAuthenticated$.next({loaded: true, payload: null});
         this.router.navigate(['login']);
@@ -63,8 +64,19 @@ export class LoggedUserService {
     logout$.subscribe();
   };
 
-  checkLevel(a) {
-    return of(true)
+  authHeader(): HttpHeaders {
+    let Headers: HttpHeaders;
+    this.isAuthenticated$.subscribe(
+      (res) => Headers = new HttpHeaders().set('Authorization', 'Bearer ' + res.payload)
+    );
+    return Headers
+  }
+
+  checkLevel(levelexp: string) {
+    return this.currentUser.pipe(
+      map((res) => flattenNullBool(res.accountlevels[levelexp]))
+    );
+    // return of(true)
   }
 
   signUp = (username: string, pass: string) => {
@@ -72,7 +84,7 @@ export class LoggedUserService {
       username: username,
       password: pass,
       auth: {
-        type: "m.login.dummy"
+        type: 'm.login.dummy'
       }
     })).pipe(
       tap((res) => {
@@ -84,7 +96,7 @@ export class LoggedUserService {
         return this.functions.handleError(err.error)
       })
     );
-    $logged.subscribe((users) => users?this.currentUser.next({...users.JSON, ...defaultUser} as LocalUser):'');
+    $logged.subscribe((users) => users ? this.currentUser.next({...users.JSON, ...defaultUser, username: username} as LocalUser) : '');
   }
 //
 // requestLevel = (level: string): Observable<number> => this.currentUser.pipe(

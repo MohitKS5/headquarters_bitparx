@@ -1,33 +1,33 @@
 <mat-card class="profile">
-  <app-go-back-component></app-go-back-component>
+  <!--<app-go-back-component></app-go-back-component>-->
   <mat-card-title> Profile </mat-card-title>
   <mat-card-content>
     <div fxLayout="column">
       <div fxLayout="row">
         <span fxFlex="">Id:</span>
-        <span fxFlex="">{{($localUser|async)?.uid}}</span>
+        <span fxFlex="">{{($localUser|async)?.user_id}}</span>
       </div>
       <hr>
       <div fxLayout="row">
         <span fxFlex="">Username:</span>
-        <span fxFlex="">{{($localUser|async)?.displayName}}</span>
+        <span fxFlex="">{{($localUser|async)?.username}}</span>
       </div>
       <hr>
       <div fxLayout="row" fxLayoutAlign="center center">
         <span fxFlex="">Levels:</span>
-        <span fxFlex="" fxLayout="column" fxLayoutAlign="center center">
-          <span fxFlex=""
-                *ngFor="let level of ($localUser|async)?.levelsCurrent" class="chip">
+        <span fxFlex="" fxLayout="row wrap" fxLayoutAlign="left center">
+          <span
+                *ngFor="let level of CurrentLevels(($localUser|async)?.accountlevels)" class="chip">
             {{ level }}
           </span>
         </span>
       </div>
       <hr>
-      <div fxLayout="row" fxLayoutAlign="center center" *ngIf="($localUser|async)?.levelsRequested">
-        <span fxFlex="">Requested:</span>
-        <span fxFlex="" fxLayout="column" fxLayoutAlign="center center">
-          <span fxFlex=""
-                *ngFor="let level of ($localUser|async)?.levelsRequested" class="chip">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <span fxFlex="">Requested Levels:</span>
+        <span fxFlex="" fxLayout="row wrap" fxLayoutAlign="left center">
+          <span
+            *ngFor="let level of RequestedLevels(($localUser|async)?.accountlevels)" class="chip">
             {{ level }}
           </span>
         </span>
@@ -35,7 +35,7 @@
     </div>
   </mat-card-content>
 </mat-card>
-<mat-card class="profile">
+<mat-card class="profile primary">
   <mat-card-title> Request Level </mat-card-title>
   <mat-list>
     <h3 mat-subheader> Level Descriptions </h3>
@@ -43,14 +43,14 @@
       <h4>{{ level }}</h4> <p class="left-pad"> {{ descriptions[level] }} </p>
     </mat-list-item>
   </mat-list>
-  <div class="profile">
-    <form>
-      <mat-select placeholder="Level available for request" id="selectionBox" [(ngModel)]="selectedVal" name="level" #levelSelection>
+  <div>
+    <form fxLayout="row" fxLayoutAlign="center center">
+      <mat-select placeholder="Level available for request"  class="lightest" [(ngModel)]="selectedVal" name="level" #levelSelection>
         <mat-option *ngFor="let level of levels($localUser | async)" [value]="level">
           {{ level }}
         </mat-option>
       </mat-select>
-      <button mat-button type="submit" (click)="request()" [disabled]="requested">
+      <button mat-raised-button type="submit" (click)="request()" [disabled]="requested">
         Request Level
       </button>
     </form>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SynchronicityComponent } from './synchronicity.component';
+import { ActiveUsersComponent } from './active-users.component';
 
-describe('SynchronicityComponent', () => {
-  let component: SynchronicityComponent;
-  let fixture: ComponentFixture<SynchronicityComponent>;
+describe('ActiveUsersComponent', () => {
+  let component: ActiveUsersComponent;
+  let fixture: ComponentFixture<ActiveUsersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SynchronicityComponent ]
+      declarations: [ ActiveUsersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SynchronicityComponent);
+    fixture = TestBed.createComponent(ActiveUsersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

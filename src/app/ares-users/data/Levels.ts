@@ -6,6 +6,6 @@ export class Levels {
 
 export const descriptions = {
   Admin: 'Access to everything',
-  PseudoAdmin: 'Ability to view all local users',
+  PseudoAdmin: 'Ability to view all local navbar-sidenav',
   Moderator: 'yet to decide'
 };

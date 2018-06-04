@@ -15,6 +15,8 @@ import {JsontocsvService} from './utility/services/jsontocsv.service'
 // features
 import * as fromAresUsers from './ares-users';
 import * as fromUtils from './utility';
+import * as common from './common';
+import * as binance from './binance-websockets';
 
 // Components
 import {AppComponent} from './components';
@@ -23,11 +25,12 @@ import {ConfirmDialogComponent} from '@utils';
 // Modules
 import {AppRoutingModule} from './app-routing.module';
 import {AresMaterialModule} from './modules/material.module';
-import { SynchronicityComponent } from './roadtrips/components/synchronicity/synchronicity.component';
 import {MarkdownModule} from 'ngx-markdown';
 import {MaterialTableComponent} from './utility/material-table/material-table.component';
 import { MaterialTreeComponent } from './utility/material-tree/material-tree.component';
-
+import { UserLevelsComponent } from './ares-users/components/user-levels/user-levels.component';
+import { ActiveSessionsComponent } from './ares-users/components/active-sessions/active-sessions.component';
+import {BinanceRoutingModule} from './binance-websockets/route';
 
 @NgModule({
   entryComponents: [
@@ -37,8 +40,11 @@ import { MaterialTreeComponent } from './utility/material-tree/material-tree.com
     AppComponent,
     fromAresUsers.components,
     fromUtils.declarations,
-    SynchronicityComponent,
-    MaterialTreeComponent
+    MaterialTreeComponent,
+    UserLevelsComponent,
+    ActiveSessionsComponent,
+    common.components,
+    binance.componetns,
   ],
   imports: [
     // core modules
@@ -58,11 +64,13 @@ import { MaterialTreeComponent } from './utility/material-tree/material-tree.com
     AppRoutingModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    BinanceRoutingModule
   ],
   providers: [
     fromAresUsers.services,
     fromAresUsers.guards,
     fromUtils.services,
+    binance.services,
     JsontocsvService
   ],
   bootstrap: [AppComponent]

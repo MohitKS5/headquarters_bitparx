@@ -1,0 +1,19 @@
+<div class="tablewrapper">
+  <table mat-table #table [dataSource]="dataSource" matSort>
+    <ng-container *ngFor="let field of fieldheaders; let i=index" [matColumnDef]="fieldnames[i]">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{field}} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        {{element[fieldnames[i]]}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Sno">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="fieldnames"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: fieldnames;"></mat-row>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+</div>

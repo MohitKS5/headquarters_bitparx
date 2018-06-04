@@ -34,6 +34,7 @@ export const modules = [
   MatSidenavModule,
   MatTreeModule,
   MatSlideToggleModule,
+  MatPaginatorModule,
 ];
 @NgModule({
   imports: modules,

@@ -3,9 +3,9 @@
     <app-material-tree [treeData]="TREE_DATA"></app-material-tree>
   </mat-drawer>
   <mat-card class="users">
-    <mat-card-title>Admin Side Users</mat-card-title>
+    <mat-card-title>{{card_titile}}</mat-card-title>
     <mat-card-content>
-      <app-material-table [dataSource]="dataSource|async" [data]="data" [fields]="fields" [schema]="fieldnames" (slider)="toggle($event)"></app-material-table>
+      <router-outlet></router-outlet>
     </mat-card-content>
   </mat-card>
 </mat-drawer-container>

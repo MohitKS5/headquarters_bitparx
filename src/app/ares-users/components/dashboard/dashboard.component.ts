@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
     {
       name: 'LocalUsers',
       level: 'Admin',
-      link: '/users',
+      link: '/navbar-sidenav',
     },
     {
       name: 'Profile',

@@ -3,7 +3,8 @@ import {SignupComponent} from './signup';
 import {DashboardComponent} from './dashboard';
 import {ProfileComponent} from './profile';
 import {NavbarComponent} from './navbar';
-import {UsersComponent} from './users';
+import {ActiveUsersComponent} from './active-users/active-users.component';
+import {UserLevelsComponent} from './user-levels';
 
 export const components: any[] = [
   LoginComponent,
@@ -11,7 +12,9 @@ export const components: any[] = [
   ProfileComponent,
   NavbarComponent,
   SignupComponent,
-  UsersComponent
+  ActiveUsersComponent,
+  UserLevelsComponent,
+
 ];
 
 export * from './navbar';
@@ -19,5 +22,7 @@ export * from './signup';
 export * from './dashboard';
 export * from './profile';
 export * from './login';
-export * from './users';
+export * from './active-users';
+export * from './user-levels';
+export * from './active-sessions';
 

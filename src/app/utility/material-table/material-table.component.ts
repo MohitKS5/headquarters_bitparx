@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {JsontocsvService} from '../services/jsontocsv.service';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-material-table',
@@ -12,17 +13,20 @@ export class MaterialTableComponent implements OnInit {
   @Input() schema: string;
   @Input() dataSource;
   @Input() data;
+  show = false;
 
   @Output() slider = new EventEmitter<tableIndex>();
   fieldnames: Array<Array<string>>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private j2c: JsontocsvService) {
   }
 
+
   ngOnInit() {
     this.fieldnames = this.schema.replace(/[\t\n ]/g, '')
       .split(';').map(val => val.split(','));
-    console.log(this.fieldnames)
+    this.dataSource.paginator = this.paginator;
   }
 
   excel() {

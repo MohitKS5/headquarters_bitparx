@@ -1,0 +1,18 @@
+.users {
+  margin: 10vh auto;
+  min-width: 500px;
+  width: 60%;
+}
+
+mat-card-title {
+  text-align: center;
+}
+
+mat-drawer{
+  width: 20vw;
+  min-width: 300px;
+}
+
+mat-drawer-container{
+  min-height: 90vh;
+}

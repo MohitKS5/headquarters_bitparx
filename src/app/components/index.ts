@@ -6,4 +6,4 @@ export { GoBackComponent } from '../utility/go-back/go-back.component';
 export { NavbarComponent } from '../ares-users/components/navbar/navbar.component';
 export { ProfileComponent } from '../ares-users/components/profile/profile.component';
 export { SignupComponent } from '../ares-users/components/signup/signup.component';
-export { UsersComponent } from '../ares-users/components/users/users.component';
+export { NavbarSidenavTree } from '../common/navbar-sidenav/users.component';

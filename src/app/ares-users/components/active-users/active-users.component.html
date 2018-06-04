@@ -1,0 +1,26 @@
+<div class="tablewrapper">
+  <mat-table #table [dataSource]="dataSource|async">
+    <ng-container *ngFor="let field of fieldheaders; let i=index" [matColumnDef]="field">
+      <mat-header-cell *matHeaderCellDef> {{field}} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <span>{{element[fieldnames[i]]}}</span>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Password">
+      <mat-header-cell *matHeaderCellDef>Password</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-raised-button (click)="changePassword(element.username)"> Reset </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="Sno">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayOrder"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayOrder"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

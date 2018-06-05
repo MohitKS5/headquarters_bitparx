@@ -14,8 +14,10 @@ import {
   MatTableModule,
   MatToolbarModule, MatTreeModule
 } from '@angular/material';
+import {CdkTableModule} from '@angular/cdk/table';
 
 export const modules = [
+  CdkTableModule,
   MatButtonModule,
   MatCardModule,
   MatDialogModule,
@@ -25,8 +27,6 @@ export const modules = [
   MatProgressSpinnerModule,
   MatRippleModule,
   MatSelectModule,
-  MatSnackBarModule,
-  MatSortModule,
   MatTableModule,
   MatToolbarModule,
   MatListModule,
@@ -35,6 +35,8 @@ export const modules = [
   MatTreeModule,
   MatSlideToggleModule,
   MatPaginatorModule,
+  MatSnackBarModule,
+  MatSortModule,
 ];
 @NgModule({
   imports: modules,

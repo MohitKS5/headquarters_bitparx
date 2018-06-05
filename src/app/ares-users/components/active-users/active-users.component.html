@@ -1,7 +1,7 @@
 <div class="tablewrapper">
-  <mat-table #table [dataSource]="dataSource|async">
+  <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let field of fieldheaders; let i=index" [matColumnDef]="field">
-      <mat-header-cell *matHeaderCellDef> {{field}} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{field}} </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <span>{{element[fieldnames[i]]}}</span>
       </mat-cell>
@@ -16,11 +16,11 @@
 
     <ng-container matColumnDef="Sno">
       <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+      <mat-cell *matCellDef="let i = index"> {{paginator.pageSize * paginator.pageIndex + i+1}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayOrder"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayOrder"></mat-row>
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons #paginator></mat-paginator>
 </div>

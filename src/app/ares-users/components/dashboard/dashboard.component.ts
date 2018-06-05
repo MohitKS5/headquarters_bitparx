@@ -24,6 +24,11 @@ export class DashboardComponent implements OnInit {
       name: 'Profile',
       level: 'Member',
       link: '/profile'
+    },
+    {
+      name: 'Binance Market stats',
+      level: 'Member',
+      link: '/trade'
     }
   ];
 

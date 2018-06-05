@@ -1,26 +1,26 @@
 <button mat-raised-button (click)="excel()">Download Excel</button>
 
 <div class="tablewrapper">
-  <mat-table #table [dataSource]="dataSource|async">
+  <mat-table #table [dataSource]="dataSourceValues" matSort>
 
-    <ng-container *ngFor="let field of fields; let i = index" [matColumnDef]="field">
-      <mat-header-cell *matHeaderCellDef> {{field}} </mat-header-cell>
+    <ng-container *ngFor="let field of fieldnames; let i = index" [matColumnDef]="field">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{fields[i]}}</mat-header-cell>
       <mat-cell *matCellDef="let element">
-        <span *ngIf="!checkbool(element[fieldnames[i]])">{{getVal(element,i)}}</span>
+        <span *ngIf="!checkbool(element[field])">{{element[field]}}</span>
         <mat-slide-toggle
-          #slider *ngIf="checkbool(element[fieldnames[i]])" [checked]="element[fieldnames[i]]"
+          #slider *ngIf="checkbool(element[field])" [checked]="element[field]"
           (change)="syncIt(element,field,slider.checked)">
         </mat-slide-toggle>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="sno">
-      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> No.</mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{paginator.pageSize * paginator.pageIndex + i+1}}</mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['sno'].concat(fields)"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['sno'].concat(fields);"></mat-row>
+    <mat-header-row *matHeaderRowDef="['sno'].concat(fieldnames)"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['sno'].concat(fieldnames);"></mat-row>
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons #paginator></mat-paginator>
 </div>

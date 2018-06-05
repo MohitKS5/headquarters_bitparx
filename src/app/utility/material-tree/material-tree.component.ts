@@ -1,5 +1,5 @@
 import {FlatTreeControl} from '@angular/cdk/tree';
-import {Component, Injectable, Input, OnInit} from '@angular/core';
+import {Component, Injectable, Input, OnChanges, OnInit} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {BehaviorSubject, Observable, of as observableOf} from 'rxjs';
 
@@ -33,7 +33,9 @@ export class FileFlatNode {
 export class FileDatabase {
   dataChange: BehaviorSubject<FileNode[]> = new BehaviorSubject<FileNode[]>([]);
 
-  get data(): FileNode[] { return this.dataChange.value; }
+  get data(): FileNode[] {
+    return this.dataChange.value;
+  }
 
   constructor() {
   }
@@ -81,7 +83,7 @@ export class FileDatabase {
   templateUrl: './material-tree.component.html',
   styleUrls: ['./material-tree.component.css']
 })
-export class MaterialTreeComponent implements OnInit{
+export class MaterialTreeComponent implements OnInit, OnChanges {
   @Input() treeData;
   treeControl: FlatTreeControl<FileFlatNode>;
 
@@ -92,8 +94,7 @@ export class MaterialTreeComponent implements OnInit{
   constructor(private database: FileDatabase) {
   }
 
-  ngOnInit(){
-    this.database.initialize(this.treeData);
+  ngOnInit() {
     this.treeFlattener = new MatTreeFlattener(this.transformer, this._getLevel,
       this._isExpandable, this._getChildren);
     this.treeControl = new FlatTreeControl<FileFlatNode>(this._getLevel, this._isExpandable);
@@ -102,6 +103,10 @@ export class MaterialTreeComponent implements OnInit{
     this.database.dataChange.subscribe(data => {
       this.dataSource.data = data;
     });
+  }
+
+  ngOnChanges() {
+    this.database.initialize(this.treeData);
   }
 
   transformer = (node: FileNode, level: number) => {
@@ -113,13 +118,19 @@ export class MaterialTreeComponent implements OnInit{
     return flatNode;
   }
 
-  private _getLevel = (node: FileFlatNode) => { return node.level; };
+  private _getLevel = (node: FileFlatNode) => {
+    return node.level;
+  };
 
-  private _isExpandable = (node: FileFlatNode) => { return node.expandable; };
+  private _isExpandable = (node: FileFlatNode) => {
+    return node.expandable;
+  };
 
   private _getChildren = (node: FileNode): Observable<FileNode[]> => {
     return observableOf(node.children);
   };
 
-  hasChild = (_: number, _nodeData: FileFlatNode) => { return _nodeData.expandable; };
+  hasChild = (_: number, _nodeData: FileFlatNode) => {
+    return _nodeData.expandable;
+  };
 }

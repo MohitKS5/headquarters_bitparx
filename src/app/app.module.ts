@@ -3,7 +3,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CdkTableModule} from '@angular/cdk/table';
 
 import {HttpClientModule} from '@angular/common/http';
 import {CKEditorModule} from 'ng2-ckeditor';
@@ -26,7 +25,6 @@ import {ConfirmDialogComponent} from '@utils';
 import {AppRoutingModule} from './app-routing.module';
 import {AresMaterialModule} from './modules/material.module';
 import {MarkdownModule} from 'ngx-markdown';
-import {MaterialTableComponent} from './utility/material-table/material-table.component';
 import { MaterialTreeComponent } from './utility/material-tree/material-tree.component';
 import { UserLevelsComponent } from './ares-users/components/user-levels/user-levels.component';
 import { ActiveSessionsComponent } from './ares-users/components/active-sessions/active-sessions.component';
@@ -55,15 +53,14 @@ import {BinanceRoutingModule} from './binance-websockets/route';
     HttpClientModule,
 
     // shared modules
-    CdkTableModule,
     CKEditorModule,
     FlexLayoutModule,
-    AresMaterialModule,
     ReactiveFormsModule,
     MarkdownModule.forRoot(),
     AppRoutingModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    AresMaterialModule,
     BinanceRoutingModule
   ],
   providers: [

@@ -31,7 +31,8 @@ export class LoggedUserService {
     })).pipe(
       tap((res) => {
         this.isAuthenticated$.next({loaded: true, payload: res.JSON.access_token});
-        this.router.navigate(['/dashboard'])
+        this.router.navigate(['/dashboard']);
+        this.currentUser.next({...res.JSON, ...defaultUser, username: username} as LocalUser)
       }),
       catchError(err => {
         this.isAuthenticated$.next({loaded: true, payload: null});
@@ -39,7 +40,7 @@ export class LoggedUserService {
       })
     ) as Observable<ILocalUser>;
     $logged.subscribe((users) => {
-      this.currentUser.next({...users.JSON, ...defaultUser, username: username} as LocalUser)
+      // this.currentUser.next({...users.JSON, ...defaultUser, username: username} as LocalUser)
     });
   };
 
@@ -55,8 +56,8 @@ export class LoggedUserService {
   logout() {
     let logout$ = this.http.post<any>('api/logout', null, {headers: this.authHeader()}).pipe(
       tap(() => {
-        this.isAuthenticated$.next({loaded: true, payload: null});
         this.router.navigate(['login']);
+        this.isAuthenticated$.next({loaded: true, payload: null});
         this.currentUser.next(null);
       }),
       catchError((err) => this.functions.handleError(err.Error)
@@ -74,7 +75,7 @@ export class LoggedUserService {
 
   checkLevel(levelexp: string) {
     return this.currentUser.pipe(
-      map((res) => flattenNullBool(res.accountlevels[levelexp]))
+      map((res) => !!res && flattenNullBool(res.accountlevels[levelexp]))
     );
     // return of(true)
   }

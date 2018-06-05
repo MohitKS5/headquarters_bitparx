@@ -1,23 +1,26 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild} from '@angular/core';
 import {JsontocsvService} from '../services/jsontocsv.service';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-material-table',
   templateUrl: './material-table.component.html',
   styleUrls: ['./material-table.component.css']
 })
-export class MaterialTableComponent implements OnInit {
+export class MaterialTableComponent implements OnInit,OnChanges {
 
   @Input() fields: Array<string>;
   @Input() schema: string;
   @Input() dataSource;
   @Input() data;
+  dataSourceValues = new MatTableDataSource([]);
   show = false;
 
   @Output() slider = new EventEmitter<tableIndex>();
-  fieldnames: Array<Array<string>>;
+  fieldnames: Array<string>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
 
   constructor(private j2c: JsontocsvService) {
   }
@@ -25,16 +28,18 @@ export class MaterialTableComponent implements OnInit {
 
   ngOnInit() {
     this.fieldnames = this.schema.replace(/[\t\n ]/g, '')
-      .split(';').map(val => val.split(','));
+      .split(';');
+    this.dataSource.subscribe((res) => this.dataSourceValues.data = res);
+    this.dataSourceValues.paginator = this.paginator;
+    this.dataSourceValues.sort = this.sort;
+  }
+
+  ngOnChanges(){
     this.dataSource.paginator = this.paginator;
   }
 
   excel() {
     this.j2c.excel(this.data);
-  }
-
-  getVal(el, index) {
-    return this.fieldnames[index].map((val) => el[val]).join(', ')
   }
 
   checkbool(el) {

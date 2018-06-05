@@ -7,7 +7,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BitServResponse, ReceivedAccessLevels, Access, flattenNullBool, ReceivedAccounts, ReceivedDevices} from '../models/response';
 import {LoggedUserService} from './logged-user';
 import {Accounts} from '../models/accounts';
-import {toDate} from '@angular/common/src/i18n/format_date';
 import {Devices} from '../models/devices';
 
 
@@ -40,20 +39,33 @@ export class LocalUserService {
     map((values) => {
         return values.JSON.map((res) => {
           res.Created = new Date(+res.Created).toLocaleString();
-          return {...res.Profile,...res} as Accounts
+          return {...res.Profile, ...res} as Accounts
         })
       }
     ));
 
   fetchUsersDevices = () => this.http.post<BitServResponse<Array<ReceivedDevices>>>('/api/devices', '', {headers: this.auth.authHeader()}).pipe(
     map((values) => {
-      console.log(values);
+        console.log(values);
         return values.JSON.map((res) => {
           res.Created = new Date(+res.Created).toLocaleString();
           return {...res} as Devices
         })
       }
     ))
+
+  disableRegistration = (val: boolean) => {
+    let status$ = val ? this.http.delete('/api/registration', {headers: this.auth.authHeader()}) :
+      this.http.put('/api/registration',"", {headers: this.auth.authHeader()});
+    status$.pipe(
+      catchError(err => this.functions.handleError(err.Error))
+    ).subscribe()
+  };
+
+  isRegistrationDisabled = () => this.http.get<BitServResponse<boolean>>('/api/registration',{headers: this.auth.authHeader()}).pipe(
+    map((res) => res.JSON),
+    catchError(err => this.functions.handleError(err.Error))
+  )
   // res.Created = toDate(res.Created)
 
   // public userRef = (id: string): AngularFirestoreDocument<LocalUser> => this.afs.doc(`navbar-sidenav/${id}`);

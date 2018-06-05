@@ -20,6 +20,12 @@ export class ActiveUsersComponent implements OnInit {
   dataSource = new MatTableDataSource([]);
   displayOrder = ['Sno', 'Password', 'Username', 'Created', 'Displayname', 'Avatar'];
 
+  isDisabled = this.userService.isRegistrationDisabled();
+
+  DisableRegistration(val :boolean) {
+    this.userService.disableRegistration(val)
+  }
+
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.userService.fetchActiveUsers().subscribe((res) => this.dataSource.data = res);

@@ -2,7 +2,7 @@ export const tradeMenuTreeData = `
     {
     "Ticker": {
       "All Markets": "",
-      "Binance": "",
+      "Binance": ""
      },
      "Depth": {
         "NA": ""

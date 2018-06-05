@@ -1,5 +1,4 @@
-export const dashboardMenuTreeData = `
-    {
+export const dashboardMenuTreeData = `{
     "Users": {
       "Active": "active_users",
       "Sessions": "active_sessions"
@@ -12,4 +11,5 @@ export const dashboardMenuTreeData = `
       "Profile": "/profile",
       "Dashboard": "/dashboard"
      }
-}`;
+}
+`;

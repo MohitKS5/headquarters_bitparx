@@ -1,3 +1,7 @@
+<mat-slide-toggle (change)="DisableRegistration(slider.checked)" #slider [checked]="isDisabled|async"
+                  class="secondary-danger-text">
+  <b>Disable further Registration/Signup</b>
+</mat-slide-toggle>
 <div class="tablewrapper">
   <mat-table #table [dataSource]="dataSource" matSort>
     <ng-container *ngFor="let field of fieldheaders; let i=index" [matColumnDef]="field">

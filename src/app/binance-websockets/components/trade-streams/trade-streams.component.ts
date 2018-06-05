@@ -1,6 +1,6 @@
 import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {SocketService} from '../../services';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {throttleTime} from 'rxjs/internal/operators';
 
 @Component({
@@ -10,6 +10,7 @@ import {throttleTime} from 'rxjs/internal/operators';
 })
 export class TradeStreamsComponent implements OnInit, OnChanges {
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   fieldheaders = ['market', 'price change %', 'weighted avg', 'close trade Quantity', 'best bid price', 'best bid quantity', 'best ask price',
     'best ask quantity', 'open price', 'high price', 'low price'];
   fieldnames;
@@ -37,6 +38,7 @@ export class TradeStreamsComponent implements OnInit, OnChanges {
     this.dataSource.paginator = this.paginator;
     this.fieldnames = this.fields.replace(/[\t\n ]/g, '')
       .split(';');
+    this.dataSource.sort = this.sort;
 
   }
 

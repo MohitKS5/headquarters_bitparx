@@ -50,6 +50,11 @@ body{
 .secondary-text{
   color: #00a38a;
 }
+
+.secondary-danger-text{
+  color: #e91e63;
+}
+
 .light{
   background-color: rgba(255,255,255,0.2);
 }

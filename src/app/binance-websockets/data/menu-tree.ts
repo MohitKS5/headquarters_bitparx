@@ -1,28 +1,14 @@
 export const tradeMenuTreeData = `
     {
-    "Users": {
-      "Levels": "users_levels",
-      "Active": "active_users",
-      "Sessions": "active_sessions"
+    "Ticker": {
+      "All Markets": "",
+      "Binance": "",
      },
-     "Levels": {
-      "All": "levels",
-      "requested": "levelsrequested",
-      "admins": "admins"
+     "Depth": {
+        "NA": ""
      },
-    "Downloads": {
-        "angular": "src",
-      "core": "ts",
-      "compiler": "tsadf"
-    },
-    "Pictures": {
-       "angular": "sasdfrc",
-      "core": "ts",
-      "compiler": "tszxcv"
-    },
-    "Applications": {
-       "angular": "src",
-      "core": "ts",
-      "compiler": "tasdfs"
-    }
-}`
+     "Back": {
+      "Profile": "/profile",
+      "Dashboard": "/dashboard"
+     }
+}`;

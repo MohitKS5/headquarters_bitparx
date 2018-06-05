@@ -1,9 +1,9 @@
 <div class="tablewrapper">
   <table mat-table #table [dataSource]="dataSource" matSort>
-    <ng-container *ngFor="let field of fieldheaders; let i=index" [matColumnDef]="fieldnames[i]">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{field}} </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{element[fieldnames[i]]}}
+    <ng-container *ngFor="let field of fieldnames; let i=index" [matColumnDef]="field">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{fieldheaders[i]}} </mat-header-cell>
+      <mat-cell *matCellDef="let element" [class]="element.P > 0 ? 'secondary-text': 'secondary-danger-text'">
+        {{element[field]}}
       </mat-cell>
     </ng-container>
 
